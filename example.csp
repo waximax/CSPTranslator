@@ -1,0 +1,17 @@
+channel a : {0..1}
+channel b : {0..1}
+
+P1 = a.0 -> STOP
+Q1 = b.1 -> STOP
+R1 = P1 [] Q1
+
+P2 = true & (a.0 -> STOP)
+Q2 = false & (b.1 -> SKIP)
+
+ParallelProcess = P1 [{a.0} || {b.1}] Q1
+
+GeneralisedParallelProcess = P1 [| {a.0, b.1} |] Q1
+
+InterleaveProcess = P1 ||| Q1
+
+SequentialProcess = P1 ; Q1
